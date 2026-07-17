@@ -347,8 +347,71 @@ public class LinkedList {
 
 
 
-    public 
-    
+    public static  boolean isCycle(){//static banaya kyuki humne list directly nhi define ki we inserted head node then its next etc esliye to be able to call func separately 
+        Node slow = head ;
+        Node fast = head ;
+
+            while(fast != null && fast.next != null ){
+                 slow = slow.next ;  //+1
+                fast = fast.next.next ;   //+2
+
+                if(slow == fast){
+                    return true ; //cycle  exists 
+                }
+            }
+            return false ;
+    }
+
+
+
+
+    //REMOVE CYCLE IN LL
+    // 1) detect cycle 
+    // 2) slow = head 
+    // 3) while ( slow == fast )
+    //     slow -> +1
+    //     fast -> +1
+    // also track prev = null 
+    // prev.next = null/last node pointing 
+
+
+
+    public static  void removeCycle(){
+
+        //detect cycle
+        Node slow = head ;
+        Node fast = head ; 
+        boolean cycle = false; // we make this flag type variable to indicate that we r assuming no cycle at first 
+        while(fast != null && fast.next !=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast == slow){
+                cycle = true ;
+                break;
+            }
+        }
+        if(cycle = false){
+            return;
+        }
+        //if exists we will find meeting point
+        slow = head ;
+        Node prev = null;//at the end of loop this will store last node 
+        while(slow != fast){
+            prev = fast ;
+            slow = slow.next ;
+            fast = fast.next ;
+        }
+        //now slow met fast at the cycle joint end 
+        //now we remove cycle by pointing last node  to null
+        prev.next = null;
+
+
+
+    }
+
+
+   
+
 
 
 
@@ -390,13 +453,24 @@ public class LinkedList {
 
 
     public static void main(String args[]){
-        LinkedList ll = new LinkedList();
-        ll.addLast(2);
-        ll.addLast(1);
-        ll.addLast(1);
-        ll.addLast(2);
-        System.out.print(ll.checkPalindrome());
+         head = new Node(1);
+         head.next = new Node(2);
+         head.next.next = new Node(3);
+        Node temp = head.next;
+         head.next.next.next = temp ;
+         //head.next.next.next = new Node(1);//this line is wrong kyuki we ahve created a new node rather than pointing it back to the orginal one and it can have any value 
+         //cycle : 1->2->3->2
+        System.out.println(isCycle());
+        removeCycle();
+        System.out.println(isCycle());
     }}
+
+
+
+
+
+
+
 
 
 
