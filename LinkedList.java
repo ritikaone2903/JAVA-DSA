@@ -341,6 +341,21 @@ public class LinkedList {
 
 
 
+    ///////////////////////////////////////////////////
+    //DETECT A LOOP/CYCLE IN LL (FLOYD'S CYCLE FINDING ALGORITHM )
+    //approach : 2 slow fast pointers 
+
+
+
+    public 
+    
+
+
+
+
+
+
+
 
 
 
